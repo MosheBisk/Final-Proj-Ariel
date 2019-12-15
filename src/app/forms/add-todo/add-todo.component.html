@@ -1,0 +1,7 @@
+<form>
+    User ID: <input [formControl]="userId">
+    Title: <input [formControl]="title">
+    Completed: <input [formControl]="completed">
+    <button (click)="addTodo()">Submit</button>
+</form>
+<a routerLink="/todo">back to todo</a>

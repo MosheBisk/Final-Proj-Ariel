@@ -1,0 +1,31 @@
+<div>todo works</div><br>
+<!-- <div *ngIf="todoSvc.done"> -->
+<div *ngIf="todoSvc.todos">
+    <!-- <div> -->
+        User ID: <input placeholder="userID" (blur)="userID = $event.target.value"><br>
+        Titel: <input placeholder="titel" (blur)="titel = $event.target.value"><br>
+        <!-- <p>{{todoSvc.todos | searchTodo:userID:titel}}</p> -->
+    <!-- </div> -->
+    <div *ngIf="userID && titel; then mypipe else nopipe"></div>
+        <!-- <ng-template #nopipe *ngIf="todoSvc.done? mycheck('nopipe true'): mycheck('nopipe false')" > -->
+        <!-- <p>no pipe</p> -->
+        <ng-template #nopipe>
+            <!-- <ul *ngFor="let t of JSON.parse(localStorage.getItem('todoarr'))" > -->
+            <ul *ngFor="let t of todoSvc.todos" >
+                <li>userId: {{t.userId}}</li>
+                <li>id: {{t.id}}</li>
+                <li>title: {{t.title}}</li>
+                <li>completed: {{t.completed}}</li>
+            </ul>
+        </ng-template>
+        <ng-template #mypipe>
+            <!-- <p>my pipe</p> -->
+            <ul *ngFor="let t of todoSvc.todos | genSearch : 'userID': userID">
+                <li>userId: {{t.userId}}</li>
+                <li>id: {{t.id}}</li>
+                <li>title: {{t.title}}</li>
+                <li>completed: {{t.completed}}</li>
+            </ul>
+        </ng-template>
+    <a routerLink="/addTodo">Add todo</a>
+</div>
